@@ -12,16 +12,6 @@ $(function(){
     startTime = $.now();
   }
 
-  var send_results = function(){
-          $.ajax({
-          type: "post",
-          dataType: "text",
-          data: { name: winner,
-                  gameLength: finishTime/1000 },
-          url: "/results"
-        })
-  }
-
   var $player1_position = $('#player1_strip td.active');
   var $player2_position = $('#player2_strip td.active');
   if (code===49){
@@ -79,7 +69,6 @@ $(function(){
         $('td').removeClass('active');
         $('#results').show();
         return false;
-      send_results_player2();
       }
       else if(e.keyCode===49){
         console.log("ASDFASDFSAF");
