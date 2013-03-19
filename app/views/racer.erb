@@ -1,31 +1,51 @@
-<table class="racer_table">
-  <tr id="player1_strip">
-    <td id="player1initials" class="active"><%= @player1_initials %></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr id="player2_strip">
-    <td id="player2initials" class="active"><%= @player2_initials %></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
+<div id="racetrack">
+    <table class="racer_table">
+      <tr id="player1_strip">
+        <td id="player1initials" class="active"><%= @player1_initials %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr id="player2_strip">
+        <td id="player2initials" class="active"><%= @player2_initials %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    </div>
 
-<span id="winner"></span>
-<button id="reset">play again</button>
-<span id="game-url">To see your results click<a href="/game/<%= @game.id %>/results"> here!</a></span>
+    <span id="winner"></span>
+    <button id="reset">play again</button>
+    <span id="game-url">To see your results click<a href="/game/<%= @game.id %>/results"> here!</a></span>
 
