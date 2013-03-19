@@ -3,14 +3,20 @@ before '/' do
 end
 
 get '/' do
-  puts '*' *300
+  @games = Game.all
   erb :index
 end
 
 get '/gameplay' do
+  @game = Game.find(session[:game_id])
   @player1_initials = session[:player1_initials]
   @player2_initials = session[:player2_initials]
   erb :racer
+end
+
+get '/game/:id/results' do
+  @game = Game.find(params[:id])
+  erb :results
 end
 
 post '/results' do
@@ -30,4 +36,14 @@ post '/play' do
   @game.players << player1
   @game.players << player2
   redirect '/gameplay'
+end
+
+post '/playagain' do
+  game = Game.create
+  session[:game_id] = game.id
+  player1 = Player.find_by_initials(session[:player1_initials])
+  player2 = Player.find_by_initials(session[:player2_initials])
+  game.players << player1
+  game.players << player2
+  game.id.to_s
 end

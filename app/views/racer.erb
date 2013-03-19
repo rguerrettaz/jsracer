@@ -12,7 +12,7 @@
     <td></td>
   </tr>
   <tr id="player2_strip">
-    <td class="active"></td>
+    <td id="player2initials" class="active"><%= @player2_initials %></td>
     <td></td>
     <td></td>
     <td></td>
@@ -27,4 +27,5 @@
 
 <span id="winner"></span>
 <button id="reset">play again</button>
+<span id="game-url">To see your results click<a href="/game/<%= @game.id %>/results"> here!</a></span>
 

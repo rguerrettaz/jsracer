@@ -7,4 +7,9 @@
     <input type="text" name="player2_initials" placeholder="Player 2 Initials">
     <button type="submit" id="play_btn">Play!</button>
   </form>
+
+  <h1>See the results for game </h1>
+  <ul><% @games.each do |game| %>
+  <li><a href="/game/<%= game.id %>/results"><%= game.id %></a></li>
+  <% end %></ul>
 </div>
