@@ -1,6 +1,8 @@
 $(function(){
   var startTime = null;
   var finishTime;
+  var winner;
+
   $(document).on("keyup", function(e){
     $('#game-url').hide();
 
@@ -9,6 +11,17 @@ $(function(){
   if (startTime === null){
     startTime = $.now();
   }
+
+  var send_results = function(){
+          $.ajax({
+          type: "post",
+          dataType: "text",
+          data: { name: winner,
+                  gameLength: finishTime/1000 },
+          url: "/results"
+        })
+  }
+
   var $player1_position = $('#player1_strip td.active');
   var $player2_position = $('#player2_strip td.active');
   if (code===49){
@@ -26,7 +39,7 @@ $(function(){
                   gameLength: finishTime/1000 },
           url: "/results"
         })
-         .done(function(data){
+        .done(function(data){
         $('#player1_strip').hide();
         $('#winner').html("Player 1 won, Player 2 lost");
         $('#player2_strip').hide();
@@ -38,15 +51,18 @@ $(function(){
         .fail(function(jqXHR, textStatus, errorThrown){
           alert(textStatus);
         });
-      
+        
         return false;
       }
       else if ($player2_position.is(':last-child')) {
         var winner = $('#player2initials').text();
+        var endTime = $.now();
+        finishTime = (endTime-startTime);
          $.ajax({
           type: "post",
           dataType: "text",
-          data: { name: winner },
+          data: { name: winner,
+                  gameLength: finishTime/1000 },
           url: "/results"
         })
          .done(function(data){
@@ -63,6 +79,7 @@ $(function(){
         $('td').removeClass('active');
         $('#results').show();
         return false;
+      send_results_player2();
       }
       else if(e.keyCode===49){
         console.log("ASDFASDFSAF");
@@ -96,6 +113,5 @@ $(function(){
       $('#player1_strip td:first-child').addClass('active');
       $('#player2_strip td:first-child').addClass('active');
     });
-  
 });
 
