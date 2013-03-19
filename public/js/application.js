@@ -1,21 +1,29 @@
 $(function(){
-  $(document).on("keyup", function(e){  
+  var startTime = null;
+  var finishTime;
+  $(document).on("keyup", function(e){
     $('#game-url').hide();
+
   var code = (e.keyCode ? e.keyCode : e.which);
+
+  if (startTime === null){
+    startTime = $.now();
+  }
   var $player1_position = $('#player1_strip td.active');
   var $player2_position = $('#player2_strip td.active');
-
-  
   if (code===49){
         $('#player1_strip td.active').next().addClass('active');
         $('#player1_strip td.active').prev().removeClass('active');
       }
     if ($player1_position.is(':last-child')) {
       var winner = $('#player1initials').text();
+      var endTime = $.now();
+      finishTime = (endTime-startTime);
          $.ajax({
           type: "post",
           dataType: "text",
-          data: { name: winner },
+          data: { name: winner,
+                  gameLength: finishTime/1000 },
           url: "/results"
         })
          .done(function(data){

@@ -21,8 +21,11 @@ end
 
 post '/results' do
   @game = Game.find(session[:game_id])
-  winner = params[:name] #This gets from ajaxland to sinatraworld
-  @game.update_attribute("winner", winner) #YEAH!!!!!!!!!!
+  winner = params[:name] 
+  wilber = params[:gameLength]
+  puts wilber
+  @game.update_attribute("winner", winner)
+  @game.update_attribute("game_length", wilber.to_f)
   winner
 end
 
