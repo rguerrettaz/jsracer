@@ -1,7 +1,7 @@
 <div id="racetrack">
     <table class="racer_table">
-      <tr id="player1_strip">
-        <td id="player1initials" class="active"><%= @player1_initials %></td>
+      <tr id="p1_strip" data-player-name="<%= @p1_initials %>">
+        <td class="active"></td>
         <td></td>
         <td></td>
         <td></td>
@@ -21,8 +21,8 @@
         <td></td>
         <td></td>
       </tr>
-      <tr id="player2_strip">
-        <td id="player2initials" class="active"><%= @player2_initials %></td>
+      <tr id="p2_strip" data-player-name="<%= @p2_initials %>">
+        <td class="active" ></td>
         <td></td>
         <td></td>
         <td></td>
@@ -46,6 +46,6 @@
     </div>
 
     <span id="winner"></span>
-    <button id="reset">play again</button>
+    <button><a href="/gameplay">play again</a></button>
     <span id="game-url">To see your results click<a href="/game/<%= @game.id %>/results"> here!</a></span>
 

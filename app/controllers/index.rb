@@ -9,8 +9,8 @@ end
 
 get '/gameplay' do
   @game = Game.find(session[:game_id])
-  @player1_initials = session[:player1_initials]
-  @player2_initials = session[:player2_initials]
+  @p1_initials = session[:p1_initials]
+  @p2_initials = session[:p2_initials]
   erb :racer
 end
 
@@ -21,32 +21,32 @@ end
 
 post '/results' do
   @game = Game.find(session[:game_id])
-  winner = params[:name] 
-  wilber = params[:gameLength]
-  puts wilber
-  @game.update_attribute("winner", winner)
-  @game.update_attribute("game_length", wilber.to_f)
-  winner
+  @game.update_attribute("winner", params[:winner])
+  @game.update_attribute("game_length", params[:time].to_f)
+  puts '*' * 300
+  puts @game.game_length
+  puts @game.winner
+  params[:winner]
 end
 
 post '/play' do
   @game = Game.create
   session[:game_id] = @game.id
-  player1 = Player.new(initials: params[:player1_initials])
-  session[:player1_initials] = player1.initials
-  player2 = Player.new(initials: params[:player2_initials])
-  session[:player2_initials] = player2.initials
-  @game.players << player1
-  @game.players << player2
+  p1 = Player.new(initials: params[:p1_initials])
+  session[:p1_initials] = p1.initials
+  p2 = Player.new(initials: params[:p2_initials])
+  session[:p2_initials] = p2.initials
+  @game.players << p1
+  @game.players << p2
   redirect '/gameplay'
 end
 
 post '/playagain' do
   game = Game.create
   session[:game_id] = game.id
-  player1 = Player.find_by_initials(session[:player1_initials])
-  player2 = Player.find_by_initials(session[:player2_initials])
-  game.players << player1
-  game.players << player2
+  p1 = Player.find_by_initials(session[:p1_initials])
+  p2 = Player.find_by_initials(session[:p2_initials])
+  game.players << p1
+  game.players << p2
   game.id.to_s
 end
